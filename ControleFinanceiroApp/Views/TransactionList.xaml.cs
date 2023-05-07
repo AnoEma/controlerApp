@@ -2,18 +2,18 @@ namespace ControleFinanceiroApp.Views;
 
 public partial class TransactionList : ContentPage
 {
-	public TransactionList()
-	{
-		InitializeComponent();
-	}
+    public TransactionList()
+    {
+        InitializeComponent();
+    }
 
     private void OnButtonClicked_To_TransactionAdd(object sender, EventArgs e)
     {
-		App.Current.MainPage = new TransactionAdd();
+        Navigation.PushAsync(new TransactionAdd());
     }
 
     private void OnButtonClicked_To_TransactionEdit(object sender, EventArgs e)
     {
-        App.Current.MainPage = new TransactionEdit();
+        Navigation.PushAsync(new TransactionEdit());
     }
 }
