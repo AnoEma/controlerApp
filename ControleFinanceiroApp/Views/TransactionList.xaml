@@ -24,22 +24,26 @@
 
         <Button Text="Edit" Clicked="OnButtonClicked_To_TransactionEdit" HorizontalOptions="Center"/>
 
+        <Border Margin="10" 
+                BackgroundColor="{StaticResource Black}"
+                StrokeThickness="0">
+            
         <Grid ColumnDefinitions="*, 80" RowDefinitions="Auto, Auto, 30, Auto, Auto">
-            <Label Text="Saldo"/>
-            <Label Text="R$ 23.00,00" Grid.Column="1"/>
+            <Label Text="Saldo" />
+            <Label Text="R$ 23.00,00" Grid.Row="1"/>
             <Button 
                 Text="+" 
                 Clicked="OnButtonClicked_To_TransactionAdd" 
                 HorizontalOptions="Center"
-                Grid.Column="1"
-                Grid.RowSpan="2"/>
+                Grid.RowSpan="2"
+                Grid.Column="1"/>
 
             <Label Text="Receita" Grid.Row="3"/>
             <Label Text="R$ 3.600,00" Grid.Row="4"/>
 
-            <Label Text="Despesas" Grid.Row="1"/>
-            <Label Text="R$ 840,00" Grid.Row="1"/>
-
-        </Grid>
+            <Label Text="Despesas" Grid.Row="3" Grid.Column="1"/>
+                <Label Text="R$ 840,00" Grid.Row="4" Grid.Column="1"/>
+            </Grid>
+        </Border>
     </VerticalStackLayout>
 </ContentPage>
