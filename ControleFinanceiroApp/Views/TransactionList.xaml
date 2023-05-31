@@ -1,16 +1,45 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage 
+    NavigationPage.HasNavigationBar="False"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ControleFinanceiroApp.Views.TransactionList"
              Title="TransactionList">
     <VerticalStackLayout>
-        <Label 
-            Text="Vamos beber? mas sempre mete lok (:!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid ColumnDefinitions="50, *, Auto">
+            <Label Text="S"
+                   FontSize="20"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
 
-        <Button Text="+" Clicked="OnButtonClicked_To_TransactionAdd"/>
-        <Button Text="Edit" Clicked="OnButtonClicked_To_TransactionEdit"/>
-        
+            <VerticalStackLayout Grid.Column="1">
+                <Label Text="Salário"/>
+                <Label Text="30/05/203" TextColor="#BABABA"/>
+            </VerticalStackLayout>
+            <Label Grid.Column="2" 
+                   Text="R$10.000,00"
+                   TextColor="{StaticResource Tertiary}"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <Button Text="Edit" Clicked="OnButtonClicked_To_TransactionEdit" HorizontalOptions="Center"/>
+
+        <Grid ColumnDefinitions="*, 80" RowDefinitions="Auto, Auto, 30, Auto, Auto">
+            <Label Text="Saldo"/>
+            <Label Text="R$ 23.00,00" Grid.Column="1"/>
+            <Button 
+                Text="+" 
+                Clicked="OnButtonClicked_To_TransactionAdd" 
+                HorizontalOptions="Center"
+                Grid.Column="1"
+                Grid.RowSpan="2"/>
+
+            <Label Text="Receita" Grid.Row="3"/>
+            <Label Text="R$ 3.600,00" Grid.Row="4"/>
+
+            <Label Text="Despesas" Grid.Row="1"/>
+            <Label Text="R$ 840,00" Grid.Row="1"/>
+
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

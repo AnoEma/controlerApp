@@ -10,7 +10,17 @@
             Text="Novo"
             HorizontalOptions="Center"  Grid.Column="0" TextColor="White" FontSize="Title"/>
 
-                <Label Text="X" HorizontalOptions="Center" Grid.Column="1" TextColor="White" FontSize="Title"/>
+                <Image Grid.Row="0"
+                       Grid.Column="1"
+                       HorizontalOptions="Center"
+                       Source="close.png"
+                       WidthRequest="17">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </Image.GestureRecognizers>
+                    
+                </Image>
+
             </Grid>
         </Border>
 
