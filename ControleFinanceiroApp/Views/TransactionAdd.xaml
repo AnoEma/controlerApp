@@ -24,15 +24,17 @@
             </Grid>
         </Border>
 
+        <Label x:Name="Label_Error" IsVisible="False" TextColor="Red"/>
         <Grid ColumnDefinitions="*,*" Margin="30, 0">
-            <RadioButton IsChecked="True" Content="Receita" />
-            <RadioButton HorizontalOptions="End" Content="Despesa" Grid.Column="1"/>
+            <RadioButton x:Name="Entry_RadioIncome" IsChecked="True" Content="Receita" />
+            <RadioButton x:Name="Entry_RadioExpense" HorizontalOptions="End" Content="Despesa" Grid.Column="1"/>
         </Grid>
+        
 
-        <Entry Placeholder="Nome" TextColor="Black" PlaceholderColor="Black" Margin="15, 0" FontSize="Medium"/>
-        <DatePicker Margin="15, 0"/>
-        <Entry Placeholder="Valor" TextColor="Black" PlaceholderColor="Black" Margin="15, 0" FontSize="Medium"/>
+        <Entry x:Name="Entry_Name" Placeholder="Nome" TextColor="Black" PlaceholderColor="Black" Margin="15, 0" FontSize="Medium"/>
+        <DatePicker x:Name="DatePickerValue" Margin="15, 0"/>
+        <Entry x:Name="Entry_Valor" Keyboard="Numeric" Placeholder="Valor" TextColor="Black" PlaceholderColor="Black" Margin="15, 0" FontSize="Medium"/>
 
-        <Button Margin="15,0" Text="Salvar" HorizontalOptions="Center"/>
+        <Button Clicked="OnSave" Margin="15,0" Text="Salvar" HorizontalOptions="Center"/>
     </VerticalStackLayout>
 </ContentPage>

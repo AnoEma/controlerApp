@@ -4,8 +4,8 @@ namespace ControleFinanceiroApp.Repository;
 
 public interface ITransactionRepository
 {
-    void Add(Transaction transaction);
-    void Delete(Transaction transaction);
+    Task Add(Transaction transaction);
+    Task Delete(Transaction transaction);
     List<Transaction> GetAll();
-    void Update(Transaction transaction);
+    Task Update(Transaction transaction);
 }

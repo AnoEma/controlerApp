@@ -13,14 +13,18 @@ public class TransactionRepository : ITransactionRepository
         _database = database;
     }
 
-    public void Add(Transaction transaction)
+    public async Task Add(Transaction transaction)
     {
-        throw new NotImplementedException();
+        var col = _database.GetCollection<Transaction>(collectionName);
+        col.Insert(transaction);
+        col.EnsureIndex(x => x.Date);
     }
 
-    public void Delete(Transaction transaction)
+    public async Task Delete(Transaction transaction)
     {
-        throw new NotImplementedException();
+        _database
+            .GetCollection<Transaction>(collectionName)
+            .Delete(transaction.Id);
     }
 
     public List<Transaction> GetAll()
@@ -32,8 +36,10 @@ public class TransactionRepository : ITransactionRepository
             .ToList();
     }
 
-    public void Update(Transaction transaction)
+    public async Task Update(Transaction transaction)
     {
-        throw new NotImplementedException();
+       _database
+            .GetCollection<Transaction>(collectionName)
+            .Update(transaction);
     }
 }
