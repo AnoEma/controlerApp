@@ -27,7 +27,7 @@ public class TransactionRepository : ITransactionRepository
             .Delete(transaction.Id);
     }
 
-    public List<Transaction> GetAll()
+    public async Task<List<Transaction>> GetAll()
     {
         return _database
             .GetCollection<Transaction>(collectionName)

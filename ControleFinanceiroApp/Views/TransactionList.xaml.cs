@@ -2,8 +2,8 @@ namespace ControleFinanceiroApp.Views;
 
 public partial class TransactionList : ContentPage
 {
-    private readonly TransactionAdd _transactionAdd;
-    private readonly TransactionEdit _transactionEdit;
+    private TransactionAdd _transactionAdd;
+    private TransactionEdit _transactionEdit;
     public TransactionList(TransactionAdd transactionAdd, TransactionEdit transactionEdit)
     {
         _transactionAdd = transactionAdd;

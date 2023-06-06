@@ -18,11 +18,17 @@ public partial class TransactionAdd : ContentPage
         Navigation.PopModalAsync();
     }
 
-    private void OnSave(object sender, EventArgs e)
+    private async void OnSave(object sender, EventArgs e)
     {
         if (!IsValidData())
             return;
+
         _ = SaveTransaction();
+        _ = Navigation.PopModalAsync();
+
+        var count = await _repository.GetAll();
+
+        _ = App.Current.MainPage.DisplayAlert("Message", $"Quantidade de registro {count.Count}", "OK");
     }
 
     private async Task SaveTransaction()
