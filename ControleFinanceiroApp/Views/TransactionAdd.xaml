@@ -24,8 +24,8 @@
             </Grid>
         </Border>
 
-        <Label x:Name="Label_Error" IsVisible="False" TextColor="Red"/>
-        <Grid ColumnDefinitions="*,*" Margin="30, 0">
+        <Label x:Name="Label_Error" Margin="30,0" IsVisible="False" TextColor="Red"/>
+        <Grid ColumnDefinitions="*,*" Margin="30,0">
             <RadioButton x:Name="Entry_RadioIncome" IsChecked="True" Content="Receita" />
             <RadioButton x:Name="Entry_RadioExpense" HorizontalOptions="End" Content="Despesa" Grid.Column="1"/>
         </Grid>

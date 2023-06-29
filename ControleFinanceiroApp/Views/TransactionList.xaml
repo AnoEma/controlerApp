@@ -5,23 +5,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ControleFinanceiroApp.Views.TransactionList"
              Title="Listagem">
-    
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Resources/Styles/Colors.xaml"/>
+    </ContentPage.Resources>
+
     <VerticalStackLayout>
-        <Grid ColumnDefinitions="50, *, Auto">
-            <Label Text="S"
+        <CollectionView x:Name="CollectionViewTransactions">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="50, *, Auto">
+                        <Label Text="S"
                    FontSize="20"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
-
-            <VerticalStackLayout Grid.Column="1">
-                <Label Text="Salário"/>
-                <Label Text="30/05/203" TextColor="#BABABA"/>
-            </VerticalStackLayout>
-            <Label Grid.Column="2" 
-                   Text="R$10.000,00"
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="{Binding Name}"/>
+                            <Label Text="{Binding Date, StringFormat='{0:D}'}" TextColor="#BABABA"/>
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" 
+                   Text="{Binding Value, StringFormat='{0:C}'}"
                    TextColor="{StaticResource Tertiary}"
                    VerticalOptions="Center"/>
-        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <Button Text="Edit" Clicked="OnButtonClicked_To_TransactionEdit" HorizontalOptions="Center"/>
 

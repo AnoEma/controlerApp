@@ -17,8 +17,7 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             })
-           // .RegisterDatabaseAndRepositories()
-            .RegisterViews();
+            .RegisterDatabaseAndRepositories();
 
 #if DEBUG
         builder.Logging.AddDebug();
@@ -35,10 +34,16 @@ public static class MauiProgram
         });
 
         builder.Services.AddTransient<ITransactionRepository, TransactionRepository>();
+
+        builder.Services.AddTransient<TransactionAdd>();
+        builder.Services.AddTransient<TransactionEdit>();
+
+        builder.Services.AddTransient<TransactionList>();
+
         return builder;
     }
 
-    public static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
+    public static MauiAppBuilder RegisterViews(MauiAppBuilder builder)
     {
         builder.Services.AddTransient<TransactionAdd>();
         builder.Services.AddTransient<TransactionEdit>();

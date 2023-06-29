@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.Messaging;
 using ControleFinanceiroApp.Model;
 using ControleFinanceiroApp.Repository;
 using System.Text;
@@ -6,11 +7,11 @@ namespace ControleFinanceiroApp.Views;
 
 public partial class TransactionAdd : ContentPage
 {
-    private readonly TransactionRepository _repository;
-    public TransactionAdd(TransactionRepository repository)
+    private readonly ITransactionRepository _repository;
+    public TransactionAdd(ITransactionRepository repository)
     {
         InitializeComponent();
-        _repository = repository;
+       _repository = repository;
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
@@ -23,12 +24,16 @@ public partial class TransactionAdd : ContentPage
         if (!IsValidData())
             return;
 
-        _ = SaveTransaction();
-        _ = Navigation.PopModalAsync();
+         SaveTransaction();
+         Navigation.PopModalAsync();
+
+        string evento = "Created";
+        //Publicar evento
+        WeakReferenceMessenger.Default.Send<string>(evento);
 
         var count = await _repository.GetAll();
 
-        _ = App.Current.MainPage.DisplayAlert("Message", $"Quantidade de registro {count.Count}", "OK");
+        App.Current.MainPage.DisplayAlert("Message", $"Quantidade de registro {count.Count}", "OK");
     }
 
     private async Task SaveTransaction()
@@ -66,8 +71,9 @@ public partial class TransactionAdd : ContentPage
             isValid = false;
         }
 
-        if (isValid)
+        if (!isValid)
         {
+            Label_Error.IsVisible = true;
             Label_Error.Text = stringBuilder.ToString();
         }
 
