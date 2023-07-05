@@ -11,7 +11,7 @@ public partial class TransactionAdd : ContentPage
     public TransactionAdd(ITransactionRepository repository)
     {
         InitializeComponent();
-       _repository = repository;
+        _repository = repository;
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
@@ -24,8 +24,8 @@ public partial class TransactionAdd : ContentPage
         if (!IsValidData())
             return;
 
-         SaveTransaction();
-         Navigation.PopModalAsync();
+        await SaveTransaction();
+        await Navigation.PopModalAsync();
 
         string evento = "Created";
         //Publicar evento
@@ -33,7 +33,7 @@ public partial class TransactionAdd : ContentPage
 
         var count = await _repository.GetAll();
 
-        App.Current.MainPage.DisplayAlert("Message", $"Quantidade de registro {count.Count}", "OK");
+        await App.Current.MainPage.DisplayAlert("Message", $"Quantidade de registro {count.Count}", "OK");
     }
 
     private async Task SaveTransaction()
