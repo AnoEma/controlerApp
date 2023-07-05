@@ -15,7 +15,7 @@
                 <DataTemplate>
                     <Grid Padding="11" ColumnDefinitions="50, *, Auto">
                         <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="TapGestureRecognizerTapped_To_TransactionEdit"/>
+                            <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="TapGestureRecognizerTapped_To_TransactionEdit"/>
                         </Grid.GestureRecognizers>
                         <Label Text="S"
                    FontSize="20"
