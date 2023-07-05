@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.Messaging;
+using ControleFinanceiroApp.Model;
 using ControleFinanceiroApp.Repository;
 
 namespace ControleFinanceiroApp.Views;
@@ -23,7 +24,26 @@ public partial class TransactionList : ContentPage
 
     private void Reload()
     {
-        CollectionViewTransactions.ItemsSource = _repository.GetAll().Result;
+        var items = _repository.GetAll().Result;
+        CollectionViewTransactions.ItemsSource = items;
+        CalculoBalance(items);
+    }
+
+    private void CalculoBalance(List<Transaction> items)
+    {
+        double income = items
+                    .Where(x => x.Type == Model.TransactionType.Income)
+                    .Sum(x => x.Value);
+
+        double expense = items
+            .Where(x => x.Type == Model.TransactionType.Expenses)
+            .Sum(x => x.Value);
+
+        double balance = income - expense;
+
+        LabelIncome.Text = income.ToString("C");
+        LabelExpense.Text = expense.ToString("C");
+        LabelBalancne.Text = income.ToString("C");
     }
 
     private void OnButtonClicked_To_TransactionAdd(object sender, EventArgs e)
@@ -32,8 +52,10 @@ public partial class TransactionList : ContentPage
         Navigation.PushModalAsync(_transactionAddPage);
     }
 
-    private void OnButtonClicked_To_TransactionEdit(object sender, EventArgs e)
+    private void TapGestureRecognizerTapped_To_TransactionEdit(object sender, TappedEventArgs e)
     {
+        Transaction transaction = (Transaction)((TapGestureRecognizer)sender).CommandParameter;
+
         var _transactionEditPage = Handler.MauiContext.Services.GetService<TransactionEdit>();
         Navigation.PushModalAsync(_transactionEditPage);
     }

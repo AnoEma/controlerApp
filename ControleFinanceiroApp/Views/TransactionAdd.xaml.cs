@@ -43,7 +43,7 @@ public partial class TransactionAdd : ContentPage
             Name = Entry_Name.Text,
             Value = Convert.ToDouble(Entry_Valor.Text),
             Date = DatePickerValue.Date,
-            Type = Entry_RadioIncome.IsChecked ? TransactionType.Income : TransactionType.Income
+            Type = Entry_RadioIncome.IsChecked ? TransactionType.Income : TransactionType.Expenses
         };
 
         await _repository.Add(model);
