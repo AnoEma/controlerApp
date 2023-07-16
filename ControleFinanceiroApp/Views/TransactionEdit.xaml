@@ -16,12 +16,13 @@
                        Source="close.png"
                        WidthRequest="17">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizerTappedToClose"/>
                     </Image.GestureRecognizers>
 
                 </Image>
             </Grid>
         </Border>
+        <Label x:Name="Label_Error" Margin="30,0" IsVisible="False" TextColor="Red"/>
 
         <Grid ColumnDefinitions="*,*" Margin="30, 0">
             <RadioButton 
@@ -51,6 +52,6 @@
             Margin="15, 0" 
             FontSize="Medium"/>
 
-        <Button Margin="15,0" Text="Salvar" FontSize="Medium" HorizontalOptions="Center"/>
+        <Button Margin="15,0" Clicked="OnSaveAsync" Text="Salvar" FontSize="Medium" HorizontalOptions="Center"/>
     </VerticalStackLayout>
 </ContentPage>
