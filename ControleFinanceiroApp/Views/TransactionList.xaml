@@ -3,10 +3,15 @@
     NavigationPage.HasNavigationBar="False"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:ControleFinanceiroApp.Libraries.Converters"
              x:Class="ControleFinanceiroApp.Views.TransactionList"
              Title="Listagem">
     <ContentPage.Resources>
         <ResourceDictionary Source="/Resources/Styles/Colors.xaml"/>
+        <ResourceDictionary>
+            <converters:TransactionValueConverter x:Key="TransactionValueConverter"/>
+            <converters:TransactionValueColorConverter x:Key="TransactionValueColorConverter"/>
+        </ResourceDictionary>
     </ContentPage.Resources>
 
     <VerticalStackLayout>
@@ -26,8 +31,8 @@
                             <Label Text="{Binding Date, StringFormat='{0:D}'}" TextColor="#BABABA"/>
                         </VerticalStackLayout>
                         <Label Grid.Column="2" 
-                   Text="{Binding Value, StringFormat='{0:C}'}"
-                   TextColor="{StaticResource Tertiary}"
+                   Text="{Binding ., Converter={StaticResource TransactionValueConverter}}"
+                   TextColor="{Binding ., Converter={StaticResource TransactionValueColorConverter} }"
                    VerticalOptions="Center"/>
                     </Grid>
                 </DataTemplate>
@@ -67,7 +72,7 @@
                     Grid.Row="3" 
                     FontSize="8" 
                     TextColor="#979797"/>
-                
+
                 <Label 
                     x:Name="LabelIncome"
                     Grid.Row="4" 
