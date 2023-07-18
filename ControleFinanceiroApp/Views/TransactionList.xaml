@@ -11,6 +11,8 @@
         <ResourceDictionary>
             <converters:TransactionValueConverter x:Key="TransactionValueConverter"/>
             <converters:TransactionValueColorConverter x:Key="TransactionValueColorConverter"/>
+            <converters:TransactionValueSubString x:Key="TransactionValueSubString"/>
+            <converters:TransactionNameValueColor x:Key="TransactionNameValueColor"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -22,18 +24,27 @@
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="TapGestureRecognizerTapped_To_TransactionEdit"/>
                         </Grid.GestureRecognizers>
-                        <Label Text="S"
-                   FontSize="20"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"/>
+                        <Border
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            BackgroundColor="{Binding Name, Converter={StaticResource TransactionNameValueColor}}"
+                            StrokeShape="RoundRectangle 20">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="TapGestureRecognizerTapped_To_TransactionDelete"/>
+                            </Border.GestureRecognizers>
+                            <Label Text="{Binding Name, Converter={StaticResource TransactionValueSubString}}"
+                                   Margin="10,2"
+                                   Padding="2"
+                                   FontSize="20"/>
+                        </Border>
                         <VerticalStackLayout Grid.Column="1">
                             <Label Text="{Binding Name}"/>
                             <Label Text="{Binding Date, StringFormat='{0:D}'}" TextColor="#BABABA"/>
                         </VerticalStackLayout>
                         <Label Grid.Column="2" 
-                   Text="{Binding ., Converter={StaticResource TransactionValueConverter}}"
-                   TextColor="{Binding ., Converter={StaticResource TransactionValueColorConverter} }"
-                   VerticalOptions="Center"/>
+                               Text="{Binding ., Converter={StaticResource TransactionValueConverter}}"
+                               TextColor="{Binding ., Converter={StaticResource TransactionValueColorConverter} }"
+                               VerticalOptions="Center"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -56,16 +67,16 @@
                     Grid.Row="1" 
                     TextColor="White"/>
                 <Button 
-                Text="+" 
-                Clicked="OnButtonClicked_To_TransactionAdd" 
-                HorizontalOptions="Center"
-                Grid.RowSpan="2"
-                Grid.Column="1"
-                FontSize="48"
-                Padding="-5"
-                CornerRadius="27"
-                HeightRequest="54"
-                WidthRequest="54"/>
+                    Text="+" 
+                    Clicked="OnButtonClicked_To_TransactionAdd" 
+                    HorizontalOptions="Center"
+                    Grid.RowSpan="2"
+                    Grid.Column="1"
+                    FontSize="48"
+                    Padding="-5"
+                    CornerRadius="27"
+                    HeightRequest="54"
+                    WidthRequest="54"/>
 
                 <Label 
                     Text="Receita" 

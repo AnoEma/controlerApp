@@ -43,7 +43,7 @@ public partial class TransactionList : ContentPage
 
         LabelIncome.Text = income.ToString("C");
         LabelExpense.Text = expense.ToString("C");
-        LabelBalancne.Text = income.ToString("C");
+        LabelBalancne.Text = balance.ToString("C");
     }
 
     private void OnButtonClicked_To_TransactionAdd(object sender, EventArgs e)
@@ -54,9 +54,7 @@ public partial class TransactionList : ContentPage
 
     private void TapGestureRecognizerTapped_To_TransactionEdit(object sender, TappedEventArgs e)
     {
-        var grid = (Grid)sender;
-        var gesture = (TapGestureRecognizer)grid.GestureRecognizers.FirstOrDefault();
-        Transaction transaction = (Transaction)gesture.CommandParameter;
+        Transaction transaction = (Transaction)e.Parameter;
 
         var _transactionEditPage = Handler.MauiContext.Services.GetService<TransactionEdit>();
 
@@ -64,4 +62,23 @@ public partial class TransactionList : ContentPage
 
         Navigation.PushModalAsync(_transactionEditPage);
     }
+
+    private async void TapGestureRecognizerTapped_To_TransactionDelete(object sender, TappedEventArgs e)
+    {
+        var deleted = await App.Current.MainPage.DisplayAlert("Message", $"O registro será removido definitamente!", "Sim", "Não");
+
+        if (!deleted)
+            return;
+
+        Transaction transaction = (Transaction)e.Parameter;
+
+        await _repository.Delete(transaction);
+        Reload();
+    }
+
+    private void AnimationaBorder(Border border, bool IsDeleteAnimation)
+    {
+
+    }
+
 }
